@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import SpellList from "./components/SpellList.vue";
+import Book from "./components/Book.vue";
 import SpellInst from "./components/SpellInstruction.vue";
-import SpellFilter from "./components/SpellFilter.vue";
+import Filter from "./components/Filter.vue";
 import spells from "../tools/spells.json";
 import { loadSetting, saveSetting } from "./lib/setting";
 import { onBeforeMount, ref } from "vue";
@@ -11,6 +11,7 @@ import type {
   SpellStatus,
   SpellStatusArray,
 } from "./lib/interface";
+import Progress from "./components/Progress.vue";
 
 const spellStatus = ref<SpellStatusArray>([]);
 const filterTypes = ref<FilterTypes>({
@@ -39,9 +40,9 @@ onBeforeMount(() => {
   orderByLevel.value = loadSetting("order-by-level") || false;
 });
 
-const handleStatusChange = (index: number, learned: SpellStatus) => {
+const handleStatusChange = (index: number, learned: SpellStatus | boolean) => {
   const statusArr: SpellStatusArray = spells.map((_, i) =>
-    i === index ? learned : spellStatus.value[i] || 0
+    (i === index ? learned : spellStatus.value[i]) ? 1 : 0
   );
   saveSetting("spell-status", statusArr);
   spellStatus.value = statusArr;
@@ -69,7 +70,7 @@ const handleOrderChange = (val: boolean) => {
 <template>
   <section>
     <aside>
-      <SpellFilter
+      <Filter
         :filterTypes="filterTypes"
         :filterLevel="filterLevel"
         :orderByLevel="orderByLevel"
@@ -77,23 +78,24 @@ const handleOrderChange = (val: boolean) => {
         @levelChange="handleLevelChange"
         @orderChange="handleOrderChange"
       />
-      <SpellList
-        :spells="spells"
-        :spellStatus="spellStatus"
-        @change="handleStatusChange"
-      />
+      <Book :spellStatus="spellStatus" @change="handleStatusChange" />
+      <Progress :spellStatus="spellStatus" @change="handleStatusChange" />
     </aside>
     <SpellInst
       :filterTypes="filterTypes"
       :filterLevel="filterLevel"
-      :spells="spells"
       :spellStatus="spellStatus"
       :orderByLevel="orderByLevel"
+      @change="handleStatusChange"
     />
   </section>
 </template>
 
 <style>
+html {
+  font-size: 16px;
+}
+
 body {
   background: #2b2b2b;
   color: #fff;
@@ -125,24 +127,21 @@ body {
   }
 }
 
-.inst-version-tag {
-  background-color: rgba(144, 103, 173);
-  font-size: 90%;
-  color: black !important;
-  font-weight: bold;
-  padding: 2px;
-  border-radius: 5px;
+input {
+  padding: 0 10px;
+  border: 0;
+  outline: 0;
+  line-height: 32px;
+  background: #333;
+  color: #fff;
+  border-radius: 16px;
 }
 
-.inst-version-tag-4-5 {
-  background-color: rgba(228, 101, 124);
+input:focus {
+  box-shadow: 0 0 2px #ffbe31;
 }
 
-.inst-version-tag-5-15 {
-  background-color: rgba(127, 15, 170);
-}
-
-.inst-version-tag-5-45 {
-  background-color: rgba(144, 103, 173);
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 </style>

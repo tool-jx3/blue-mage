@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import type { SpellStatus, SpellStatusArray } from "@/lib/interface";
+import type { SpellStatusArray } from "@/lib/interface";
 import { spells } from "@/lib/spell";
 import { computed, ref } from "vue";
 import { spellIcon, spellIconSrcset } from "../icon";
+import Title from "./Title.vue";
 
 const props = defineProps<{
   spellStatus: SpellStatusArray;
 }>();
 const emit = defineEmits<{
-  (e: "change", i: number, status: SpellStatus): void;
+  (e: "change", i: number, status: boolean): void;
 }>();
 
 const pageSize = 16;
@@ -19,50 +20,20 @@ const showSpells = computed(() =>
   spells.slice((page.value - 1) * pageSize, page.value * pageSize)
 );
 
-const countByPatch = (() => {
-  const result: Record<string, number> = {};
-  spells.forEach((i) => {
-    result[i.patch] = (result[i.patch] || 0) + 1;
-  });
-  return result;
-})();
-const patches = Object.keys(countByPatch);
-
-const progressByPatch = computed(() => {
-  const result: Record<string, number> = {};
-  spells.forEach((i, index) => {
-    result[i.patch] =
-      (result[i.patch] || 0) + (props.spellStatus[index] ? 1 : 0);
-  });
-  return result;
-});
-
-const progressAll = computed(() => {
-  return props.spellStatus.filter((i) => i).length;
-});
-
 const handleClick = (i: number) => {
   setSpell(i, !props.spellStatus[i]);
 };
 
 const setSpell = (i: number, status: boolean) => {
-  const val = status ? 1 : 0;
-  if (props.spellStatus[i] === val) return;
-  emit("change", i, val);
-};
-
-const batchSetSpell = (status: boolean, patch?: string) => {
-  for (let i = 0; i < spells.length; i++) {
-    if (patch && spells[i].patch !== patch) continue;
-    setSpell(i, status);
-  }
+  if (!!props.spellStatus[i] === status) return;
+  emit("change", i, status);
 };
 </script>
 
 <template>
-  <div class="spell-list">
-    <h3>青魔法书</h3>
-    <div class="spell-list-pager">
+  <div class="wrap">
+    <Title style="margin-bottom: 10px">青魔法书</Title>
+    <div class="pager">
       <span
         v-for="p in pages"
         :key="p"
@@ -86,34 +57,12 @@ const batchSetSpell = (status: boolean, patch?: string) => {
       <img :src="spellIcon(s)" :srcset="spellIconSrcset(s)" />
       <span>{{ s.no }}</span>
     </div>
-    <p class="spell-list-note">选中（已学习）的技能不会出现在获取方式中</p>
-    <h3>进度</h3>
-    <div class="spell-progress">
-      <span>总体</span>
-      <button @click="batchSetSpell(false)">清空</button>
-      <progress :value="progressAll" :max="spells.length"></progress>
-      <button @click="batchSetSpell(true)">全选</button>
-    </div>
-    <div v-for="patch in patches" :key="patch" class="spell-progress">
-      <span>
-        <span
-          class="inst-version-tag"
-          :class="{ ['inst-version-tag-' + patch.replace(/\./g, '-')]: true }"
-          >{{ patch }}</span
-        >
-      </span>
-      <button @click="batchSetSpell(false, patch)">清空</button>
-      <progress
-        :value="progressByPatch[patch]"
-        :max="countByPatch[patch]"
-      ></progress>
-      <button @click="batchSetSpell(true, patch)">全选</button>
-    </div>
+    <p class="note">选中（已学习）的技能不会出现在获取方式中</p>
   </div>
 </template>
 
-<style>
-.spell-list {
+<style scoped>
+.wrap {
   user-select: none;
   display: flex;
   flex-wrap: wrap;
@@ -123,31 +72,13 @@ const batchSetSpell = (status: boolean, patch?: string) => {
   background: #2b2b2b;
 }
 
-.spell-list h3 {
-  width: 100%;
-  color: #fff;
-}
-
-.spell-progress {
-  width: 100%;
-  display: flex;
-}
-
-.spell-progress > span {
-  width: 50px;
-}
-
-.spell-progress > progress {
-  flex: 1;
-}
-
-.spell-list-pager {
+.pager {
   width: 100%;
   margin-bottom: 5px;
   color: #fff;
 }
 
-.spell-list-pager span {
+.pager span {
   display: inline-block;
   cursor: pointer;
   width: 20px;
@@ -158,7 +89,7 @@ const batchSetSpell = (status: boolean, patch?: string) => {
   text-align: center;
 }
 
-.spell-list-pager span.active {
+.pager span.active {
   text-shadow: 0 0 2px #ffbe31;
   border-color: #ffbe31;
 }
@@ -194,7 +125,7 @@ const batchSetSpell = (status: boolean, patch?: string) => {
 
 .spell span {
   color: #eee1c5;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 16px;
 }
 
@@ -214,7 +145,8 @@ const batchSetSpell = (status: boolean, patch?: string) => {
   background: #ffbe31;
 }
 
-.spell-list-note {
-  font-size: 14px;
+.note {
+  margin-bottom: 0;
+  font-size: 0.875rem;
 }
 </style>

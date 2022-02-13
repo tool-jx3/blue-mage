@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { FilterTypes } from "@/lib/interface";
 import type { SpellType } from "@/lib/spell";
+import Title from "./Title.vue";
+import Indicator from "./Indicator.vue";
 
 const props = defineProps<{
   filterTypes: FilterTypes;
@@ -30,9 +32,9 @@ const handleOrder = (order: boolean) => {
 </script>
 
 <template>
-  <div class="spell-filter">
-    <h3>角色等级</h3>
-    <div class="spell-level">
+  <div class="wrap">
+    <Title>角色等级</Title>
+    <div class="level">
       <input
         type="number"
         max="70"
@@ -41,15 +43,16 @@ const handleOrder = (order: boolean) => {
         @input="handleInput"
       />
       <div
-        class="spell-level-order"
+        class="order"
         :class="{ checked: props.orderByLevel }"
         @click="handleOrder(props.orderByLevel)"
       >
+        <Indicator :checked="props.orderByLevel" bordered />
         按等级排序
       </div>
     </div>
 
-    <h3>学习途径过滤</h3>
+    <Title>学习途径过滤</Title>
     <ul>
       <li
         v-for="(checked, type, i) in filterTypes"
@@ -57,23 +60,23 @@ const handleOrder = (order: boolean) => {
         class="type"
         :class="{
           lighter: i % 2 === 0,
-          checked: checked,
         }"
         @click="handleClick(type, checked)"
       >
         <img :src="`icons/type_${type}.png`" />
+        <Indicator :checked="checked" />
       </li>
     </ul>
   </div>
 </template>
 
-<style>
-.spell-filter {
+<style scoped>
+.wrap {
   user-select: none;
   margin-bottom: 20px;
 }
 
-.spell-filter input {
+.wrap input {
   padding: 0 10px;
   line-height: 32px;
   background: #333;
@@ -82,22 +85,22 @@ const handleOrder = (order: boolean) => {
   border-radius: 16px;
 }
 
-.spell-filter h3:first-child {
-  margin-top: 0;
-}
-
-.spell-level {
+.level {
   display: flex;
 }
 
-.spell-level-order {
+.order {
   display: flex;
   align-items: center;
   margin-left: 10px;
   cursor: pointer;
 }
 
-.spell-filter ul {
+.order .indicator {
+  margin-right: 10px;
+}
+
+.wrap ul {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
@@ -106,7 +109,7 @@ const handleOrder = (order: boolean) => {
   list-style: none;
 }
 
-.spell-filter .type {
+.type {
   position: relative;
   padding: 10px 0 6px;
   flex: 1;
@@ -116,35 +119,16 @@ const handleOrder = (order: boolean) => {
   cursor: pointer;
 }
 
-.spell-filter img {
+.type img {
   width: 32px;
   height: 32px;
 }
 
-.spell-filter .type.lighter {
+.type.lighter {
   background: #373737;
 }
 
-.spell-filter .type::after,
-.spell-level-order::before {
-  display: block;
-  width: 8px;
-  height: 8px;
-  content: "";
-  background: #222;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-.spell-level-order::before {
-  margin-right: 6px;
-}
-
-.spell-filter .type::after {
-  margin-top: 6px;
-}
-
-.spell-filter .type.checked::after,
-.spell-level-order.checked::before {
-  background: #ffbe31;
+.type .indicator {
+  margin-top: 10px;
 }
 </style>

@@ -22,7 +22,6 @@ const text = computed(() => renderSpellMethod(props.method));
 .wrap {
   margin: 0;
   line-height: 24px;
-  font-size: 16px;
 }
 
 .type {
@@ -34,7 +33,7 @@ const text = computed(() => renderSpellMethod(props.method));
 .note {
   margin: 0;
   line-height: 16px;
-  font-size: 12px;
+  font-size: 0.75rem;
   opacity: 0.75;
   margin-left: 20px;
 }

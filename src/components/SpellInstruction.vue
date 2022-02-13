@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { spellIcon, spellIconSrcset } from "../icon";
-import SpellMethod from "./Method.vue";
-import { spells, SpellType } from "../lib/spell";
+import { spells } from "../lib/spell";
+import type { FilterTypes, SpellStatusArray } from "@/lib/interface";
+import SpellItem from "./SpellItem.vue";
 
 const props = defineProps<{
-  filterTypes: Record<SpellType, boolean>;
+  filterTypes: FilterTypes;
   filterLevel: number;
   orderByLevel: boolean;
-  spellStatus: Array<0 | 1>;
+  spellStatus: SpellStatusArray;
+}>();
+const emit = defineEmits<{
+  (e: "change", i: number, status: boolean): void;
 }>();
 
 const showSpells = computed(() => {
@@ -24,81 +27,32 @@ const showSpells = computed(() => {
 
   return filtered;
 });
+
+const learnedByNo = (no: string) => {
+  return props.spellStatus[+no - 1] === 1;
+};
+
+const changeByNo = (no: string, learned: boolean) => {
+  emit("change", +no - 1, learned);
+};
 </script>
 
 <template>
   <main class="spell-inst">
     <h3>可学习技能列表</h3>
     <p v-if="showSpells.length === 0">当前条件下暂无可学习的技能</p>
-    <div v-for="s in showSpells" class="inst" :key="s.no">
-      <img
-        class="inst-spell-icon"
-        :src="spellIcon(s, true)"
-        :srcset="spellIconSrcset(s, true)"
-        :data-ck-action-id="s.action"
-      />
-      <div class="inst-content">
-        <h4>
-          <span
-            class="inst-version-tag"
-            :class="{
-              ['inst-version-tag-' + s.patch.replace(/\./g, '-')]: true,
-            }"
-            >{{ s.patch }}</span
-          >{{ " " }}
-          <span>[{{ s.no }}]</span>
-          {{ s.spell }}
-          <small>(Lv.{{ s.level }})</small>
-        </h4>
-        <ul>
-          <li v-for="(m, mi) in s.method" :key="mi">
-            <spell-method :method="m" />
-          </li>
-        </ul>
-      </div>
-    </div>
+    <spell-item
+      v-for="spell in showSpells"
+      :key="spell.no"
+      :spell="spell"
+      :learned="learnedByNo(spell.no)"
+      @change="changeByNo(spell.no, $event)"
+    />
   </main>
 </template>
 
 <style>
 .spell-inst h3 {
   margin-top: 0;
-}
-
-.inst {
-  min-height: 48px;
-  padding: 10px;
-}
-
-.inst-spell-icon {
-  float: left;
-  width: 48px;
-  height: 48px;
-  margin-right: 12px;
-  border-radius: 5px;
-  box-shadow: 0 2px 2px #070707;
-}
-
-.inst-content {
-  overflow: hidden;
-  color: #fff;
-}
-
-.inst-content h4 {
-  margin: 0;
-  line-height: 24px;
-  font-size: 16px;
-  font-weight: normal;
-}
-
-.inst-content h4 span {
-  color: #eee1c5;
-}
-
-.inst-content ul,
-.inst-content li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
 }
 </style>
