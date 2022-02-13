@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { spells } from "../lib/spell";
+import { spells, learnedByNo, indexByNo } from "../lib/spell";
 import type { FilterTypes, SpellStatusArray } from "@/lib/interface";
 import SpellItem from "./SpellItem.vue";
 
@@ -27,14 +27,6 @@ const showSpells = computed(() => {
 
   return filtered;
 });
-
-const learnedByNo = (no: string) => {
-  return props.spellStatus[+no - 1] === 1;
-};
-
-const changeByNo = (no: string, learned: boolean) => {
-  emit("change", +no - 1, learned);
-};
 </script>
 
 <template>
@@ -45,8 +37,8 @@ const changeByNo = (no: string, learned: boolean) => {
       v-for="spell in showSpells"
       :key="spell.no"
       :spell="spell"
-      :learned="learnedByNo(spell.no)"
-      @change="changeByNo(spell.no, $event)"
+      :learned="learnedByNo(props.spellStatus, spell.no)"
+      @change="emit('change', indexByNo(spell.no), $event)"
     />
   </main>
 </template>

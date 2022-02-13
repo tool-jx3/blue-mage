@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { SpellStatusArray } from "@/lib/interface";
-import { spells } from "@/lib/spell";
+import { spells, learnedByNo, indexByNo } from "@/lib/spell";
 import { computed, ref } from "vue";
 import { spellIcon, spellIconSrcset } from "../icon";
 import Title from "./Title.vue";
@@ -20,13 +20,8 @@ const showSpells = computed(() =>
   spells.slice((page.value - 1) * pageSize, page.value * pageSize)
 );
 
-const handleClick = (i: number) => {
-  setSpell(i, !props.spellStatus[i]);
-};
-
-const setSpell = (i: number, status: boolean) => {
-  if (!!props.spellStatus[i] === status) return;
-  emit("change", i, status);
+const toggleSpell = (i: number) => {
+  emit("change", i, !props.spellStatus[i]);
 };
 </script>
 
@@ -48,9 +43,9 @@ const setSpell = (i: number, status: boolean) => {
       class="spell"
       :class="{
         lighter: i % 2 === Math.floor(i / 4) % 2,
-        learned: !!props.spellStatus[i],
+        learned: learnedByNo(props.spellStatus, s.no),
       }"
-      @click="handleClick(i)"
+      @click="toggleSpell(indexByNo(s.no))"
       :title="s.spell"
       :data-ck-action-id="s.action"
     >

@@ -1,4 +1,5 @@
 import rawSpells from "../../tools/spells.json";
+import type { SpellStatusArray } from "./interface";
 
 export enum SpellType {
   Map = "map",
@@ -84,3 +85,9 @@ export function renderSpellMethod(method: SpellMethod) {
       return `${method.text}`;
   }
 }
+
+export const learnedByNo = (spellStatus: SpellStatusArray, no: string) => {
+  return spellStatus[indexByNo(no)] === 1;
+};
+
+export const indexByNo = (no: string) => +no - 1;
