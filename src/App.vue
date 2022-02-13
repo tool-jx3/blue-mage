@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Book from "./components/Book.vue";
-import SpellInst from "./components/SpellInstruction.vue";
+import SpellList from "./components/SpellList.vue";
 import Filter from "./components/Filter.vue";
 import spells from "../tools/spells.json";
 import { loadSetting, saveSetting } from "./lib/setting";
@@ -13,6 +13,7 @@ import type {
 } from "./lib/interface";
 import Progress from "./components/Progress.vue";
 
+const filter = ref("");
 const spellStatus = ref<SpellStatusArray>([]);
 const filterTypes = ref<FilterTypes>({
   special: true,
@@ -70,6 +71,11 @@ const handleOrderChange = (val: boolean) => {
 <template>
   <section>
     <aside>
+      <input
+        class="search"
+        v-model="filter"
+        placeholder="搜索技能名或获取方式"
+      />
       <Filter
         :filterTypes="filterTypes"
         :filterLevel="filterLevel"
@@ -81,12 +87,14 @@ const handleOrderChange = (val: boolean) => {
       <Book :spellStatus="spellStatus" @change="handleStatusChange" />
       <Progress :spellStatus="spellStatus" @change="handleStatusChange" />
     </aside>
-    <SpellInst
+    <SpellList
+      :filter="filter"
       :filterTypes="filterTypes"
       :filterLevel="filterLevel"
       :spellStatus="spellStatus"
       :orderByLevel="orderByLevel"
       @change="handleStatusChange"
+      @clearFilter="filter = ''"
     />
   </section>
 </template>
@@ -107,8 +115,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  padding-top: 20px;
-  padding-left: 20px;
+  padding: 20px;
 }
 
 #app aside {
@@ -135,6 +142,7 @@ input {
   background: #333;
   color: #fff;
   border-radius: 16px;
+  box-sizing: border-box;
 }
 
 input:focus {
@@ -143,5 +151,12 @@ input:focus {
 
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+</style>
+
+<style scoped>
+.search {
+  width: 100%;
+  margin-bottom: 20px;
 }
 </style>
