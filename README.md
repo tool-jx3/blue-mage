@@ -8,3 +8,4 @@ A book for blue mages.
 | Provider     | URL                                         |
 | ------------ | ------------------------------------------- |
 | Github Pages | https://thewakingsands.github.io/blue-mage/ |
+| FFCafe       | https://guides.xivcdn.com/blue-mage/        |
