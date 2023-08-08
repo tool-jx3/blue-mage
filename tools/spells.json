@@ -2973,6 +2973,30 @@
         "position": [33, 33, 0],
         "mob": "大哥布林",
         "level": 70
+      },
+      {
+        "type": "map",
+        "map": "珂露西亚岛",
+        "rank": null,
+        "position": [37, 28, 0],
+        "mob": "大哥布林",
+        "level": 70
+      },
+      {
+        "type": "map",
+        "map": "珂露西亚岛",
+        "rank": null,
+        "position": [26, 10, 0],
+        "mob": "大哥布林守卫",
+        "level": 70
+      },
+      {
+        "type": "map",
+        "map": "珂露西亚岛",
+        "rank": "A",
+        "position": [],
+        "mob": "小小杀手",
+        "level": 80
       }
     ]
   },
@@ -3017,6 +3041,14 @@
         "position": [17, 30, 0],
         "mob": "长尾犰狳",
         "level": 77
+      },
+      {
+        "type": "map",
+        "map": "萨维奈岛",
+        "rank": "B",
+        "position": [],
+        "mob": "金刚鸠摩罗",
+        "level": 90
       }
     ]
   },
@@ -3235,7 +3267,7 @@
     "spell_ja": "フォースフィールド",
     "spell_en": "Force Field",
     "spell": "力场",
-    "level": 80,
+    "level": 60,
     "icon": "003370.png",
     "icon_hr1": "003370_hr1.png",
     "icon_book": "072318.png",
@@ -3245,6 +3277,12 @@
         "type": "special",
         "text": "学习 120 个技能后可从[乌尔达哈来生回廊]的[异男子嘎希迦]处获得[天青图腾]",
         "level": 80
+      },
+      {
+        "type": "trail",
+        "name": "萨菲洛特歼殛战",
+        "mob": "萨菲洛特",
+        "level": 60
       }
     ]
   },
