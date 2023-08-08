@@ -18,7 +18,7 @@ const emit = defineEmits<{
 
 const handleInput = (e: Event) => {
   let val = +(e?.target as any).value;
-  if (isNaN(val)) val = 70;
+  if (isNaN(val)) val = 80;
   emit("levelChange", val);
 };
 
@@ -37,7 +37,7 @@ const handleOrder = (order: boolean) => {
     <div class="level">
       <input
         type="number"
-        max="70"
+        max="80"
         min="1"
         :value="props.filterLevel"
         @input="handleInput"
@@ -50,6 +50,13 @@ const handleOrder = (order: boolean) => {
         <Indicator :checked="props.orderByLevel" bordered />
         按等级排序
       </div>
+    </div>
+
+    <div
+      v-if="props.filterLevel > 70"
+      style="padding-top: 10px; color: yellow; font-size: 14px"
+    >
+      国服尚未更新 6.45，信息仅供参考
     </div>
 
     <Title>学习途径过滤</Title>

@@ -53,6 +53,8 @@ export interface Spell {
   action: number;
   patch: string;
   spell: string;
+  spell_ja?: string;
+  spell_en?: string;
   level: number;
   icon: string;
   icon_hr1: string;
