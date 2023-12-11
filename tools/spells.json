@@ -3017,6 +3017,7 @@
         "type": "dungeon",
         "name": "避暑离宫马利卡大井",
         "mob": "大犰狳",
+        "note": "BOSS #1",
         "level": 77
       }
     ]
@@ -3112,6 +3113,7 @@
         "type": "dungeon",
         "name": "暗影决战诺弗兰特",
         "mob": "幻光狂战士",
+        "note": "BOSS #3",
         "level": 80
       }
     ]
@@ -3133,6 +3135,7 @@
         "type": "dungeon",
         "name": "魔术工房玛托雅工作室",
         "mob": "土泥人",
+        "note": "BOSS #1",
         "level": 80
       }
     ]
@@ -3154,6 +3157,7 @@
         "type": "dungeon",
         "name": "魔法宫殿宇宙宫",
         "mob": "宫殿的隐者",
+        "note": "BOSS #1",
         "level": 80
       }
     ]
@@ -3256,6 +3260,7 @@
         "type": "dungeon",
         "name": "伪造天界格鲁格火山",
         "mob": "得到宽恕的猥亵",
+        "note": "BOSS #3",
         "level": 79
       }
     ]
@@ -3357,6 +3362,7 @@
         "type": "dungeon",
         "name": "水妖幻园多恩美格禁园",
         "mob": "美眼 因克·佐恩",
+        "note": "BOSS #1",
         "level": 73
       }
     ]
@@ -3378,6 +3384,7 @@
         "type": "dungeon",
         "name": "魔法宫殿宇宙宫",
         "mob": "卢格斯",
+        "note": "BOSS #3",
         "level": 80
       }
     ]
@@ -3399,6 +3406,7 @@
         "type": "dungeon",
         "name": "魔术工房玛托雅工作室",
         "mob": "水滴精",
+        "note": "BOSS #2",
         "level": 80
       }
     ]
@@ -3420,6 +3428,7 @@
         "type": "dungeon",
         "name": "末日暗影亚马乌罗提",
         "mob": "至大灾兽",
+        "note": "BOSS #3",
         "level": 80
       }
     ]
