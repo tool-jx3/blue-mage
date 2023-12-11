@@ -36,12 +36,6 @@ const emit = defineEmits<{
           No.{{ props.spell.no }}
         </Tag>
         {{ props.spell.spell }}
-        <span
-          v-if="props.spell.patch === '6.45' && !props.spell.spell"
-          style="opacity: 0.6"
-        >
-          {{ `(${props.spell.spell_ja} / ${props.spell.spell_en}) ` }}
-        </span>
         <small>(Lv.{{ props.spell.level }})</small>
       </h4>
       <ul class="methods">

@@ -3058,7 +3058,7 @@
     "patch": "6.45",
     "spell_ja": "補水",
     "spell_en": "Rehydration",
-    "spell": "",
+    "spell": "补水",
     "level": 70,
     "icon": "003361.png",
     "icon_hr1": "003361_hr1.png",
@@ -3070,7 +3070,7 @@
         "map": "安穆·艾兰",
         "rank": null,
         "position": [32, 9, 0],
-        "mob": "Slippery Armadillo",
+        "mob": "滑溜犰狳",
         "level": 70
       }
     ]
@@ -3081,7 +3081,7 @@
     "patch": "6.45",
     "spell_ja": "マジカルブレス",
     "spell_en": "Breath Of Magic",
-    "spell": "",
+    "spell": "魔力吐息",
     "level": 80,
     "icon": "003362.png",
     "icon_hr1": "003362_hr1.png",
@@ -3245,7 +3245,7 @@
     "patch": "6.45",
     "spell_ja": "コンヴィクション・マルカート",
     "spell_en": "Conviction Marcato",
-    "spell": "坚信",
+    "spell": "加强信音",
     "level": 79,
     "icon": "003369.png",
     "icon_hr1": "003369_hr1.png",

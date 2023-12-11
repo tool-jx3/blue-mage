@@ -52,13 +52,6 @@ const handleOrder = (order: boolean) => {
       </div>
     </div>
 
-    <div
-      v-if="props.filterLevel > 70"
-      style="padding-top: 10px; color: yellow; font-size: 14px"
-    >
-      国服尚未更新 6.45，信息仅供参考
-    </div>
-
     <Title>学习途径过滤</Title>
     <ul>
       <li

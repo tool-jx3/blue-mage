@@ -23,7 +23,7 @@ const filterTypes = ref<FilterTypes>({
   trail: true,
   raid: true,
 });
-const filterLevel = ref(70);
+const filterLevel = ref(80);
 const orderByLevel = ref(false);
 
 onBeforeMount(() => {
@@ -37,7 +37,7 @@ onBeforeMount(() => {
     ...filterTypes.value,
     ...(loadSetting("filter-types") || {}),
   };
-  filterLevel.value = loadSetting("filter-level") || 70;
+  filterLevel.value = loadSetting("filter-level") || 80;
   orderByLevel.value = loadSetting("order-by-level") || false;
 });
 
