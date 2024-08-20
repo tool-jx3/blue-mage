@@ -27,7 +27,7 @@ const toggleSpell = (i: number) => {
 
 <template>
   <div class="wrap">
-    <Title style="margin-bottom: 10px">青魔法书</Title>
+    <Title style="margin-bottom: 10px">青魔法書</Title>
     <div class="pager">
       <span
         v-for="p in pages"
@@ -52,7 +52,7 @@ const toggleSpell = (i: number) => {
       <img :src="spellIcon(s)" :srcset="spellIconSrcset(s)" />
       <span>{{ s.no }}</span>
     </div>
-    <p class="note">选中（已学习）的技能不会出现在获取方式中</p>
+    <p class="note">選中（已學習）的技能不會出現在獲取方式中</p>
   </div>
 </template>
 

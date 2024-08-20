@@ -28,7 +28,7 @@ const emit = defineEmits<{
         <patch-version :version="props.spell.patch" />
         <Tag
           color="#eee1c5"
-          title="点击切换学习状态"
+          title="點擊切換學習狀態"
           style="cursor: pointer"
           @click="emit('change', !learned)"
         >

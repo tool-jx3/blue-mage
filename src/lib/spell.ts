@@ -1,4 +1,4 @@
-import rawSpells from "../../tools/spells.json";
+import rawSpells from "../../tools/spells.zhtw.json";
 import type { SpellStatusArray } from "./interface";
 
 export enum SpellType {

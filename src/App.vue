@@ -2,7 +2,7 @@
 import Book from "./components/Book.vue";
 import SpellList from "./components/SpellList.vue";
 import Filter from "./components/Filter.vue";
-import spells from "../tools/spells.json";
+import spells from "../tools/spells.zhtw.json";
 import { loadSetting, saveSetting } from "./lib/setting";
 import { onBeforeMount, ref } from "vue";
 import type { SpellType } from "./lib/spell";
@@ -74,7 +74,7 @@ const handleOrderChange = (val: boolean) => {
       <input
         class="search"
         v-model="filter"
-        placeholder="搜索技能名或获取方式"
+        placeholder="搜索技能名或獲取方式"
       />
       <Filter
         :filterTypes="filterTypes"

@@ -33,7 +33,7 @@ const handleOrder = (order: boolean) => {
 
 <template>
   <div class="wrap">
-    <Title>角色等级</Title>
+    <Title>角色等級</Title>
     <div class="level">
       <input
         type="number"
@@ -48,11 +48,11 @@ const handleOrder = (order: boolean) => {
         @click="handleOrder(props.orderByLevel)"
       >
         <Indicator :checked="props.orderByLevel" bordered />
-        按等级排序
+        按等級排序
       </div>
     </div>
 
-    <Title>学习途径过滤</Title>
+    <Title>學習途徑過濾</Title>
     <ul>
       <li
         v-for="(checked, type, i) in filterTypes"

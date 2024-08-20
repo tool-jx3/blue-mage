@@ -76,25 +76,25 @@ const allLearned = computed(() =>
       <template v-if="mode === 'notLearned'">
         {{
           showSpells.length
-            ? "展示未学习技能"
+            ? "展示未學習技能"
             : allLearned
-            ? "恭喜，您已经掌会了当前版本的所有技能"
-            : "当前条件下暂无可学习的技能"
+            ? "恭喜，您已經掌會了當前版本的所有技能"
+            : "當前條件下暫無可學習的技能"
         }}，
         <a href="javascript:void(0)" @click="notLearnedOnly = false">
-          切换至所有技能
+          切換至所有技能
         </a>
       </template>
       <template v-else-if="mode === 'all'">
         展示所有技能，
         <a href="javascript:void(0)" @click="notLearnedOnly = true">
-          切换至未学习技能
+          切換至未學習技能
         </a>
       </template>
       <template v-else>
-        展示包含“{{ props.filter }}”的技能（{{ showSpells.length }} 个），
+        展示包含“{{ props.filter }}”的技能（{{ showSpells.length }} 個），
         <a href="javascript:void(0)" @click="emit('clearFilter')">
-          清空搜索条件
+          清空搜索條件
         </a>
       </template>
     </div>

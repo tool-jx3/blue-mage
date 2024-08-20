@@ -66,11 +66,11 @@ const width = (learned: number, total: number) => {
 
 <template>
   <div class="wrap">
-    <Title>进度</Title>
+    <Title>進度</Title>
     <div v-for="(counter, patch) in progress" :key="patch" class="item">
       <span>
         <patch-version v-if="patch !== 'all'" :version="patch" />
-        <template v-else>总体</template>
+        <template v-else>總體</template>
       </span>
       <div class="detail">
         <button class="button" @click="batchSetSpell(false, patch)">
@@ -79,7 +79,7 @@ const width = (learned: number, total: number) => {
         <div class="progress" :title="`${counter.learned}/${counter.total}`">
           <div :style="{ width: width(counter.learned, counter.total) }"></div>
         </div>
-        <button class="button" @click="batchSetSpell(true, patch)">全选</button>
+        <button class="button" @click="batchSetSpell(true, patch)">全選</button>
       </div>
     </div>
   </div>
